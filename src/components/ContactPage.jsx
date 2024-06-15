@@ -7,15 +7,19 @@ function ContactPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+        if(message==="")
+        {
+            return; 
+        }
       const response = await fetch('http://localhost:8000/api/users/feedback', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ message })
+        body: JSON.stringify({ feedback:message, })
       });
 
-      if (response.ok) {
+      if (response.status === 200) {
         setResponseMessage('Thank you for your message! We will get back to you soon.');
         setMessage('');
       } else {

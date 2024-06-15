@@ -1,21 +1,47 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 
-export const AuthContext = createContext();
+// AsyncStorage không sử dụng được trong React, thay vào đó sử dụng localStorage hoặc sessionStorage
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+const AuthContext = createContext();
 
-  const login = (userData) => {
-    setUser(userData);
-  };
+const AuthProvider = ({ children }) => {
+    const [loginInfo, setLoginInfo] = useState({});
+    const [isLogin, setLogin] = useState(false);
 
-  const logout = () => {
-    setUser(null);
-  };
+    const login = async (jwt, userInfo) => {
+        setLogin(true);
+        setLoginInfo(userInfo);
+        // Sử dụng localStorage thay thế cho AsyncStorage
+        localStorage.setItem('JWT', jwt);
+        localStorage.setItem('userInfo', JSON.stringify(userInfo));
+    };
 
-  return (
-    <AuthContext.Provider value={{ user, login, logout }}>
-      {children}
-    </AuthContext.Provider>
-  );
+    const checkLogin = () => {
+        // Lấy dữ liệu từ localStorage
+        const token = localStorage.getItem('JWT');
+        setLogin(token ? true : false);
+        if (token) setLoginInfo(JSON.parse(localStorage.getItem('userInfo')));
+        return token !== null;
+    };
+
+    const logout = () => {
+        setLogin(false);
+        // Xóa dữ liệu từ localStorage khi đăng xuất
+        localStorage.removeItem('JWT');
+        localStorage.removeItem('userInfo');
+    };
+
+    // Sử dụng useEffect để kiểm tra xem người dùng đã đăng nhập trước đó hay chưa khi component được tạo
+    useEffect(() => {
+        checkLogin();
+    }, []);
+
+    return (
+        <AuthContext.Provider value={{ isLogin, loginInfo, login, checkLogin, logout }}>
+            {children}
+        </AuthContext.Provider>
+    );
 };
+
+export { AuthContext, AuthProvider };

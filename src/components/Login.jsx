@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-// Shared Tailwind CSS classes
 const inputClasses = "shadow appearance-none border rounded w-full py-2 px-3 text-zinc-700 leading-tight focus:outline-none focus:shadow-outline";
 const labelClasses = "block text-zinc-700 dark:text-zinc-300 text-sm font-bold mb-2";
 
@@ -8,6 +8,7 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
+    const navigate = useNavigate();
 
     const handleLogin = async () => {
         try {
@@ -21,17 +22,20 @@ const Login = () => {
 
             const data = await response.json();
             if (data.type === 1) {
-                setMessage({ text: 'Email is not exists', color: 'red' });
-            } else if (data.type===0) {
+                setMessage({ text: 'Email does not exist', color: 'red' });
+            } else if (data.type === 0) {
                 setMessage({ text: 'Login successful', color: 'green' });
-            }
-            else if(data.type===2)
-            {
+                localStorage.setItem('token', data.token); 
+                if (data.userInfo.role === 'admin') {
+                    navigate('/admin');
+                } else {
+                    navigate('/courses');
+                }
+            } else if (data.type === 2) {
                 setMessage({ text: 'Password is wrong. Please try again!', color: 'red' });
             }
         } catch (error) {
-            console.error('Error occurred:', error);
-            setMessage({ text: 'An error occurred while logging in', color: 'red' });
+            setMessage({ text: 'An error occurred while logging in, please try again', color: 'red' });
         }
     };
 
