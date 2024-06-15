@@ -10,8 +10,8 @@ const AuthProvider = ({ children }) => {
     const [isLogin, setLogin] = useState(false);
 
     const login = async (jwt, userInfo) => {
-        setLogin(true);
-        setLoginInfo(userInfo);
+        setLogin(prev => prev = true);
+        setLoginInfo(prev => prev = userInfo);
         localStorage.setItem('JWT', jwt);
         localStorage.setItem('userInfo', JSON.stringify(userInfo));
     };

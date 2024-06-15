@@ -6,8 +6,6 @@ function CoursePage() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    // Simulate fetching course details from API
-    // Replace this with your actual API endpoint
     fetch('http://localhost:8000/api/courses/courseId')
       .then(response => {
         if (!response.ok) {

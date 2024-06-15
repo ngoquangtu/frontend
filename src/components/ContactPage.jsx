@@ -3,31 +3,42 @@ import React, { useState } from 'react';
 function ContactPage() {
   const [message, setMessage] = useState('');
   const [responseMessage, setResponseMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (message.trim() === "") {
+      setResponseMessage('Please enter a message before submitting.');
+      return;
+    }
+    setIsLoading(true);
     try {
-        if(message==="")
-        {
-            return; 
-        }
+      const token = localStorage.getItem('token'); 
+
       const response = await fetch('http://localhost:8000/api/users/feedback', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}` 
         },
-        body: JSON.stringify({ feedback:message, })
+        
+    
+        body: JSON.stringify({ feedback: message }),
       });
+      
+  
 
-      if (response.status === 200) {
-        setResponseMessage('Thank you for your message! We will get back to you soon.');
-        setMessage('');
-      } else {
-        throw new Error('Failed to send message');
+
+      if (!response.ok) {
+        throw new Error(`Failed to send message. Status: ${response.status}`);
       }
+      setResponseMessage('Thank you for your message! We will get back to you soon.');
+      setMessage('');
     } catch (error) {
-      console.error('There was an error sending the message!', error);
-      setResponseMessage('There was an error sending your message. Please try again later.');
+      console.error(error);
+      setResponseMessage(error.message || 'There was an error sending your message. Please try again later.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -57,6 +68,7 @@ function ContactPage() {
           </a>
         </div>
       </form>
+      {isLoading && <p>Sending message...</p>}
       {responseMessage && <p className="mt-4 text-green-600">{responseMessage}</p>}
     </div>
   );

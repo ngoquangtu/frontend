@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const inputClasses = "shadow appearance-none border rounded w-full py-2 px-3 text-zinc-700 leading-tight focus:outline-none focus:shadow-outline";
-const labelClasses = "block text-zinc-700 dark:text-zinc-300 text-sm font-bold mb-2";
-
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -25,7 +22,7 @@ const Login = () => {
                 setMessage({ text: 'Email does not exist', color: 'red' });
             } else if (data.type === 0) {
                 setMessage({ text: 'Login successful', color: 'green' });
-                localStorage.setItem('token', data.token); 
+                localStorage.setItem('token', data.token);
                 if (data.userInfo.role === 'admin') {
                     navigate('/admin');
                 } else {
@@ -40,53 +37,75 @@ const Login = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-zinc-100 dark:bg-zinc-800">
-            <div className="bg-white dark:bg-zinc-900 shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-md">
-                <h2 className="text-2xl text-center font-bold mb-8">Login</h2>
-                <form>
-                    <div className="mb-4">
-                        <label className={labelClasses} htmlFor="email">
-                            Email
-                        </label>
-                        <input
-                            className={inputClasses}
-                            id="email"
-                            type="text"
-                            placeholder="Enter your email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
+        <div className="min-h-screen flex items-center justify-center bg-white">
+            <div className="flex w-full h-full flex-wrap">
+                <div className="flex-1 hidden md:flex items-center justify-center bg-white">
+                    <img
+                        src={"../assets/img-authpage.png"}
+                        alt="AuthImg"
+                        className="mx-auto mb-6"
+                        style={{ width: '1200px', scale: '1.2' }}
+                    />
+                </div>
+                <div className="flex-1 flex items-center justify-center">
+                    <div className="flex flex-col items-center px-4 w-full max-w-md">
+                        <a href="/" className="mb-16">
+                            <img src={"../assets/logo.svg"} alt="Logo" className="mx-auto" style={{ width: '180px' }} />
+                        </a>
+                        <div className="bg-white shadow-lg rounded px-4 mb-4 w-full max-w-md">
+                            <h2 className="text-2xl text-center font-bold mt-8 mb-2">Welcome back!</h2>
+                            <h3 className="text-l text-gray text-center mb-8">Please enter your information to login</h3>
+                            <form>
+                                <div className="mb-2">
+                                    <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300" htmlFor="email">
+                                        Email
+                                    </label>
+                                    <input
+                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-zinc-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        id="email"
+                                        type="text"
+                                        placeholder="Enter your email"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                <div className="mb-8">
+                                    <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300" htmlFor="password">
+                                        Password
+                                    </label>
+                                    <input
+                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-zinc-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        id="password"
+                                        type="password"
+                                        placeholder="Enter your password"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                {message && <div className="text-center text-sm mb-4" style={{ color: message.color }}>{message.text}</div>}
+                                <button
+                                    className="bg-[#12B7BD] hover:bg-[#0d9ea6] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full cursor-pointer"
+                                    type="button"
+                                    onClick={handleLogin}
+                                >
+                                    Sign In
+                                </button>
+                                <div className="flex justify-end mt-3 mb-12">
+                                    <a href="/resetpassword" className="text-[#6B50C3] hover:text-purple-700 text-sm font-bold">Forgot Password?</a>
+                                </div>
+                                <div className="flex justify-center pb-8">
+                                    <span>New here?</span>
+                                    <a href="/register" className="text-[#12B7BD] hover:bg-[#0d9ea6] font-bold ml-2">Register now</a>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <div className="mb-6">
-                        <label className={labelClasses} htmlFor="password">
-                            Password
-                        </label>
-                        <input
-                            className={inputClasses}
-                            id="password"
-                            type="password"
-                            placeholder="Enter your password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                    </div>
-                    {message && <div className="text-center text-sm mb-4" style={{ color: message.color }}>{message.text}</div>}
-                    <button
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full cursor-pointer"
-                        type="button"
-                        onClick={handleLogin}
-                    >
-                        Sign In
-                    </button>
-                    <div className="flex justify-between mt-4">
-                        <a href="/register" className="text-blue-500 hover:text-blue-700 text-sm">Register</a>
-                        <a href="/resetpassword" className="text-zinc-700 dark:text-zinc-300 text-sm">Forgot Password?</a>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
+
     );
 };
 
