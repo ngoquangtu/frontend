@@ -12,7 +12,6 @@ const AuthProvider = ({ children }) => {
     const login = async (jwt, userInfo) => {
         setLogin(true);
         setLoginInfo(userInfo);
-        // Sử dụng localStorage thay thế cho AsyncStorage
         localStorage.setItem('JWT', jwt);
         localStorage.setItem('userInfo', JSON.stringify(userInfo));
     };

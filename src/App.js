@@ -8,6 +8,7 @@ import AdminPage from './components/AdminPage';
 import ContactPage from './components/ContactPage';
 import ForgotPasswordPage from './components/ForgotPasswordPage';
 import CoursePage from './components/CoursePage';
+import ProtectedRoute from './components/ProtectedRoutes';
 
 
 function App() {
@@ -18,10 +19,9 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/resetpassword" element={<ForgotPasswordPage />} />
-                <Route path="/admin" element={<AdminPage />} />
-                <Route path="/contact" element={<ContactPage />} />
-                <Route path="/courses " element= {<CoursePage/>} />
-
+                <Route path="/admin" element={ <ProtectedRoute role="admin"> <AdminPage /> </ProtectedRoute>}/>
+                <Route path="/contact" element={ <ProtectedRoute role="admin"> <ContactPage /> </ProtectedRoute>}/>
+                <Route path="/courses " element= { <ProtectedRoute role="admin"> <CoursePage /> </ProtectedRoute>}/>
               </Routes>
               <Footer />
             </Router>
