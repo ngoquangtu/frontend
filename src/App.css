@@ -1,6 +1,13 @@
+/* Reset CSS */
 @tailwind base;
+
+/* Component styles */
 @tailwind components;
+
+/* Utility classes */
 @tailwind utilities;
+
+/* Custom styles */
 .App {
   text-align: center;
 }
@@ -8,10 +15,9 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
+  /* Animation for logo spin */
+  @media (prefers-reduced-motion: no-preference) {
     animation: App-logo-spin infinite 20s linear;
   }
 }
@@ -31,6 +37,7 @@
   color: #61dafb;
 }
 
+/* Keyframes for logo spin animation */
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

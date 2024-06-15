@@ -78,7 +78,7 @@ const Login = () => {
                     </button>
                     <div className="flex justify-between mt-4">
                         <a href="/register" className="text-blue-500 hover:text-blue-700 text-sm">Register</a>
-                        <a href="/forgotpassword" className="text-zinc-700 dark:text-zinc-300 text-sm">Forgot Password?</a>
+                        <a href="/resetpassword" className="text-zinc-700 dark:text-zinc-300 text-sm">Forgot Password?</a>
                     </div>
                 </form>
             </div>

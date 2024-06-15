@@ -23,9 +23,8 @@ const NavBar = () => {
                 <h1 className={`text-xl font-bold ${TEXT_CLASSES}`}>proSkills</h1>
                 <ul className="flex space-x-4">
                     <li><a href="/" className={LINK_CLASSES}>Home</a></li>
-                    <li><a href="" className={LINK_CLASSES}>Products</a></li>
-                    <li><a href="#" className={LINK_CLASSES}>Services</a></li>
-                    <li><a href="#" className={LINK_CLASSES}>Contact</a></li>
+                    <li><a href="/courses" className={LINK_CLASSES}>Courses</a></li>
+                    <li><a href="/contact" className={LINK_CLASSES}>Contact</a></li>
                     {/* Hiển thị nút đăng ký khi chưa đăng nhập */}
                     {!isLoggedIn && <li><a href="/register" className={LINK_CLASSES}>Register</a></li>}
                     {/* Hiển thị nút đăng nhập khi chưa đăng nhập */}

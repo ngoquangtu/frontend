@@ -1,3 +1,13 @@
+/* Reset CSS */
+@tailwind base;
+
+/* Component styles */
+@tailwind components;
+
+/* Utility classes */
+@tailwind utilities;
+
+/* Custom styles */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -48,16 +58,29 @@ form label {
   margin-bottom: 0.5rem;
 }
 
-form input, form textarea {
+form input,
+form textarea {
   width: 100%;
   padding: 0.5rem;
   margin-bottom: 1rem;
 }
 
+/* Hiệu ứng khi hover và nhấn nút */
 form button {
   background-color: #333;
   color: #fff;
   border: none;
   padding: 0.5rem 1rem;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Hiệu ứng khi hover */
+form button:hover {
+  background-color: #444;
+}
+
+/* Hiệu ứng khi nhấn */
+form button:active {
+  background-color: #555;
 }
