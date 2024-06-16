@@ -10,6 +10,7 @@ import CoursePage from './components/CoursePage';
 import ProtectedRoute from './components/ProtectedRoutes';
 import AdminPage from './pages/admin/AdminPage';
 import { AuthProvider } from './context/AuthContext';
+import About from './components/About';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
                 <Route exact path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/about " element={<About/>} />
                 <Route path="/resetpassword" element={<ForgotPasswordPage />} />
                 <Route path="/admin" element={ <ProtectedRoute role="admin"> <AdminPage /> </ProtectedRoute>}/>
                 <Route path="/contact" element={ <ContactPage />}/>

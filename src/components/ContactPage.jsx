@@ -1,77 +1,94 @@
-import React, { useState,useEffect } from 'react';
-import {trackview} from '../utils/trackview';
+import React, { useState } from 'react';
+import NavBar from './NavBar';
+
 function ContactPage() {
   const [message, setMessage] = useState('');
   const [responseMessage, setResponseMessage] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-    useEffect(() => {
-        trackview();
-    },[] );
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (message.trim() === "") {
-      setResponseMessage('Please enter a message before submitting.');
-      return;
-    }
-    setIsLoading(true);
     try {
-      const token = localStorage.getItem('token'); 
-
+      if (message === "") {
+        return;
+      }
+      const token=localStorage.getItem('token');
       const response = await fetch('http://localhost:8000/api/users/feedback', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-         'Authorization': `Bearer ${token}` 
+          'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify({ feedback: message }),
+        body: JSON.stringify({ feedback: message, })
       });
-      
-  
 
-
-      if (!response.ok) {
-        throw new Error(`Failed to send message. Status: ${response.status}`);
+      if (response.status === 200) {
+        setResponseMessage('Thank you for your message! We will get back to you soon.');
+        setMessage('');
+      } else {
+        throw new Error('Failed to send message');
       }
-      setResponseMessage('Thank you for your message! We will get back to you soon.');
-      setMessage('');
     } catch (error) {
-      console.error(error);
-      setResponseMessage(error.message || 'There was an error sending your message. Please try again later.');
-    } finally {
-      setIsLoading(false);
+      console.error('There was an error sending the message!', error);
+      setResponseMessage('There was an error sending your message. Please try again later.');
     }
   };
 
-  return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
-      <h1 className="text-3xl font-bold text-center mb-6">Contact Us</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700" htmlFor="message">
-            Message
-          </label>
-          <textarea
-            id="message"
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            required
-            rows="4"
-          ></textarea>
+
+    return (
+      <div className="relative mb-16">
+        {/* NavBar Fixed at the Top */}
+        <div className="fixed top-0 left-0 w-full bg-white z-50">
+          <NavBar />
         </div>
-        <div className="flex justify-between items-center">
-          <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-            Send
-          </button>
-          <a href="/" className="text-blue-600 hover:underline">
-            Back to Home
-          </a>
+  
+        {/* Container for the About Section */}
+        <div className="pt-16 relative">
+          {/* Image Container */}
+          <div className="relative w-full">
+            <img src="assets/all1.jpg" alt="Pro-Skills" className="w-full h-64 object-cover" />
+            {/* Black overlay */}
+            <div className="absolute inset-0 bg-black opacity-30"></div>
+            {/* "Contact Us" Text */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <h2 className="text-white text-5xl font-bold">Contact Us</h2>
+            </div>
+          </div>
+  
+          {/* Form Container */}
+          <div className="max-w-5xl mx-auto mt-6 p-6 bg-white rounded-lg">
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label className="block text-2xl font-medium text-gray-700" htmlFor="message">
+                  Write us a <span className='text-[#12B7BD]'>Message</span>
+                </label>
+                <p className="text-gray-500 text-l mb-2">If you'd like to talk directly to our team, please drop us an e-mail using the form below. We aim to get back to all messages within 24 hours but we're usually much faster.</p>
+                <textarea
+                  id="message"
+                  className="mt-1 block w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  required
+                  rows="4"
+                ></textarea>
+              </div>
+              <div className="flex justify-between items-center">
+                <button
+                  type="submit"
+                  className="px-6 py-2 bg-[#12B7BD] text-white rounded-md hover:bg-[#0F8C97] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                >
+                  Send
+                </button>
+                <a href="/" className="text-[#6B50C3] hover:underline">
+                  Back to Home
+                </a>
+              </div>
+            </form>
+            {responseMessage && <p className="mt-4 text-green-600">{responseMessage}</p>}
+          </div>
         </div>
-      </form>
-      {isLoading && <p>Sending message...</p>}
-      {responseMessage && <p className="mt-4 text-green-600">{responseMessage}</p>}
-    </div>
-  );
-}
+      </div>
+    );
+  }
+  
 
 export default ContactPage;
