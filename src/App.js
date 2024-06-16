@@ -6,11 +6,11 @@ import Login from './components/Login';
 import NavBar from './components/NavBar';
 import ContactPage from './components/ContactPage';
 import ForgotPasswordPage from './components/ForgotPasswordPage';
-import CoursePage from './components/CoursePage';
 import ProtectedRoute from './components/ProtectedRoutes';
 import AdminPage from './pages/admin/AdminPage';
 import { AuthProvider } from './context/AuthContext';
 import About from './components/About';
+import MostRatingCoursePage from './components/MostRatingCourses';
 
 
 function App() {
@@ -25,7 +25,8 @@ function App() {
                 <Route path="/resetpassword" element={<ForgotPasswordPage />} />
                 <Route path="/admin" element={ <ProtectedRoute role="admin"> <AdminPage /> </ProtectedRoute>}/>
                 <Route path="/contact" element={ <ContactPage />}/>
-                <Route path="/courses " element= { <ProtectedRoute role="admin"> <CoursePage /> </ProtectedRoute>}/>
+                <Route exact path="/courses" element={<MostRatingCoursePage />} />
+                {/* <Route path="*" component={NotFound} /> */}
               </Routes>
               <Footer />
             </Router>

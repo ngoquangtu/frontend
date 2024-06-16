@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import AdPopup from './AdPopUp';
+import MostRatingCoursePage from './MostRatingCourses';
+import MostEnrollmentCoursePage from './MostEnrollmentCourses';
+import MostCommentCoursesPage from './MostCommentCourses';
 
 const NavBar = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -118,6 +121,9 @@ const NavBar = () => {
                     </div>
                 </div>
             )}
+             <MostRatingCoursePage />
+             <MostEnrollmentCoursePage/>
+             <MostCommentCoursesPage/>
              <AdPopup />
         </nav>
     );

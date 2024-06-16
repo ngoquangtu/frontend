@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from './axios'; // Import instance axios đã cấu hình
+import axios from './axios';
 
 function AdminPage() {
   const [courses, setCourses] = useState([]);
