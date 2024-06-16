@@ -14,8 +14,8 @@ const Feedback = () => {
     const fetchData = async () => {
       try {
         const token=localStorage.getItem('token');
-        const response = await fetch('http://localhost:8000/api/courses/enrollments', {
-          method: 'POST',
+        const response = await fetch('http://localhost:8000/api/admin/allusers', {
+          method: 'GET',
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
