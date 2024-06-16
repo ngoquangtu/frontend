@@ -26,7 +26,7 @@ const AdPopup = () => {
             <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
                 <div className="bg-white rounded-lg p-8 relative max-w-3xl w-full shadow-lg flex">
                     <button
-                        className="absolute top-2 right-2 text-gray-700 hover:text-gray-900"
+                        className="absolute top-2 right-2 text-gray-700 hover:text-gray-900 text-6xl"
                         onClick={handleClose}
                     >
                         &times;
@@ -45,7 +45,7 @@ const AdPopup = () => {
                         <p className="text-sm text-gray-600">Join ProSkills today and unlock your potential!</p>
                     </div>
                     <div className="w-1/2 p-4 flex items-center justify-center">
-                        <img src="/assets/popup.png" alt="ProSkills Ad" className="rounded-lg shadow-md"/>
+                        <img src="/assets/popup.png" alt="ProSkills Ad" className="rounded-lg w-full h-auto"/>
                     </div>
                 </div>
             </div>

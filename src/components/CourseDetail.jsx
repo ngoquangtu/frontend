@@ -57,6 +57,7 @@ const CourseDetails = () => {
             <h2 className="text-white text-5xl font-bold">Course Detail</h2>
           </div>
         </div>
+        
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <h1 className="text-4xl font-bold mb-6">{course.title}</h1>
           <div className="mb-6">
@@ -86,7 +87,7 @@ const CourseDetails = () => {
             <h2 className="text-2xl font-bold mb-2">Start Date</h2>
             <p className="text-lg text-gray-700">{course.startDate}</p>
           </div>
-
+ 
         </div>
       </div>
     </div>
