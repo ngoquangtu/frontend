@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import AdPopup from './AdPopUp';
+import { useNavigate } from 'react-router-dom';
 import SearchCourses from './SearchCourses';
 
 const NavBar = () => {
@@ -9,7 +10,11 @@ const NavBar = () => {
     const [loading,setLoading] = useState(false);
     const [keyword, setKeyword] = useState('');
     const [courses, setCourses] = useState([]);
+<<<<<<< HEAD
     const [userAvatar, setUserAvatar] = useState('');
+=======
+    const navigate = useNavigate();
+>>>>>>> bbbfa1e8c46c3d2e67b08a859c2882c642899ab4
 
     useEffect(() => {
         const checkLoginStatus = () => {
@@ -42,6 +47,7 @@ const NavBar = () => {
     const handleLogout = () => {
         setIsLoggedIn(false);
         localStorage.setItem('isLoggedIn', 'false');
+        navigate('/');
     };
     const handleSearch = () => {
         setLoading(true);
@@ -77,13 +83,12 @@ const NavBar = () => {
                     </a>
                     <div className="hidden lg:block w-full lg:w-auto">
                         <SearchBar keyword={keyword} setKeyword={setKeyword} handleSearch={handleSearch} />
-                        {isSearchOpen && <SearchCourses keyword={keyword} courses={courses} loading={loading} />}
                     </div>
                 </div>
                 <div className="flex items-center space-x-4">
                     <NavItem link="/courses" text="Courses" className="hidden md:block" />
                     <NavItem link="/about" text="About" className="hidden md:block" />
-                    <NavItem link="/contact" text="Contact" className="hidden md:block mr-8" />
+                    <NavItem link="/contact" text="Contact" className="hidden md:block " />
                     <button className="lg:hidden text-gray-700 mr-16" onClick={() => setIsSearchOpen(!isSearchOpen)}>
                         <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -96,8 +101,14 @@ const NavBar = () => {
                         {isLoggedIn && (
                             <>
                                 {/* <span>{userRole}</span> */}
+<<<<<<< HEAD
                                 <img src={userAvatar} alt="Avatar" className="w-8 h-8 rounded-full" />
                                 <button onClick={handleLogout} className="text-blue-500 hover:text-blue-700">Logout</button>
+=======
+                                <img src="avatar.jpg" alt="Avatar" className="w-8 h-8 rounded-full" />
+                                <button onClick={handleLogout} className="bg-[#12B7BD] text-white px-4 py-2 rounded hover:bg-[#0f9aa4] w-24">
+                                    Logout</button>
+>>>>>>> bbbfa1e8c46c3d2e67b08a859c2882c642899ab4
                             </>
                         )}
                     </div>
@@ -119,7 +130,7 @@ const NavBar = () => {
                             </svg>
                         </button>
                         <SearchBar keyword={keyword} setKeyword={setKeyword} handleSearch={handleSearch} />
-                        {isSearchOpen && <SearchCourses keyword={keyword} courses={courses} loading={loading} />}
+
                     </div>
                 </div>
             )}
@@ -156,7 +167,7 @@ const NavBar = () => {
                             {!isLoggedIn && <NavItem link="/login" text="Login" asButton={true}/>}
                             {!isLoggedIn && <NavItem link="/register" text="Register" asButton={true} />}
                             {isLoggedIn && (
-                                <button onClick={handleLogout} asButton={true}>
+                                <button onClick={handleLogout} className='bg-[#12B7BD] text-white px-4 py-2 rounded hover:bg-[#0f9aa4] w-24' asButton={true}>
                                     Logout
                                 </button>
                             )}
