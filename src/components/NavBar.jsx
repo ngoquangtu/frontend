@@ -8,6 +8,8 @@ const NavBar = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
+    const [loading,setLoading] = useState(false);
+    const [keyword, setKeyword] = useState('');
 
     useEffect(() => {
         const checkLoginStatus = () => {
@@ -26,6 +28,30 @@ const NavBar = () => {
         setIsLoggedIn(false);
         localStorage.setItem('isLoggedIn', 'false');
     };
+    const handleSearch = () => {
+        setLoading(true);
+    
+        fetch('http://localhost:8000/api/search-courses', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ title:keyword }),
+        })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Failed to search courses');
+            }
+            return response.json();
+          })
+          .then(data => {
+            setLoading(false);
+          })
+          .catch(error => {
+            console.error('Error searching courses:', error);
+            setLoading(false);
+          });
+      };
 
     return (
         <nav className="bg-white shadow">

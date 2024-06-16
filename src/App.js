@@ -10,7 +10,7 @@ import ProtectedRoute from './components/ProtectedRoutes';
 import AdminPage from './pages/admin/AdminPage';
 import { AuthProvider } from './context/AuthContext';
 import About from './components/About';
-import MostRatingCoursePage from './components/MostRatingCourses';
+import CoursesPage from './components/CoursePage';
 
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
                 <Route path="/resetpassword" element={<ForgotPasswordPage />} />
                 <Route path="/admin" element={ <ProtectedRoute role="admin"> <AdminPage /> </ProtectedRoute>}/>
                 <Route path="/contact" element={ <ContactPage />}/>
-                <Route exact path="/courses" element={<MostRatingCoursePage />} />
+                <Route path="/courses/:id" element={<CoursesPage/>} />
                 {/* <Route path="*" component={NotFound} /> */}
               </Routes>
               <Footer />
