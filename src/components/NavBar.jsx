@@ -7,10 +7,10 @@ const NavBar = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
-    const [loading,setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [keyword, setKeyword] = useState('');
-    const [courses, setCourses] = useState([]);
     const [userAvatar, setUserAvatar] = useState('');
+    const [userName, setUserName] = useState('');
     const navigate = useNavigate();
 
 
@@ -24,17 +24,26 @@ const NavBar = () => {
             console.log(userInfo);
             if (userInfo) {
                 try {
-
-                    
                     setUserAvatar(userInfo || ''); 
                 } catch (error) {
                     console.error('Error parsing user info:', error);
                 }
             }          
-
+        };
+        const getUserName = () => {
+            const userInfo = localStorage.getItem('userName');
+            console.log(userInfo);
+            if (userInfo) {
+                try {
+                    setUserName(userInfo || ''); 
+                } catch (error) {
+                    console.error('Error parsing user info:', error);
+                }
+            }          
         };
         checkLoginStatus();
         getUserAvatar();
+        getUserName();
     }, []);
 
     const handleLoginSuccess = () => {
@@ -47,6 +56,7 @@ const NavBar = () => {
         localStorage.setItem('isLoggedIn', 'false');
         navigate('/');
     };
+
     const handleSearch = () => {
         setLoading(true);
     
@@ -98,13 +108,9 @@ const NavBar = () => {
                         {!isLoggedIn && <NavItem link="/register" text="Register" asButton={true} />}
                         {isLoggedIn && (
                             <>
-                                {/* <span>{userRole}</span> */}
-
                                 <img src={userAvatar} alt="Avatar" className="w-8 h-8 rounded-full" />
-                                <button onClick={handleLogout} className="text-blue-500 hover:text-blue-700">Logout</button>
-                                <img src="avatar.jpg" alt="Avatar" className="w-8 h-8 rounded-full" />
                                 <button onClick={handleLogout} className="bg-[#12B7BD] text-white px-4 py-2 rounded hover:bg-[#0f9aa4] w-24">
-                                    Logout</button>
+                                    Log out</button>
                             </>
                         )}
                     </div>
@@ -133,7 +139,7 @@ const NavBar = () => {
 
             {isMenuOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 z-10">
-                    <div className="fixed top-0 right-0 w-48 md:w-64 bg-white h-full z-20 p-4 flex flex-col items-center space-y-4">
+                    <div className="fixed top-0 right-0 w-80 md:w-64 bg-white h-full z-20 p-4 flex flex-col items-center space-y-4">
                         {/* Close button */}
                         <button className="self-end text-gray-700" onClick={() => setIsMenuOpen(false)}>
                             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -145,14 +151,15 @@ const NavBar = () => {
                         {isLoggedIn && (
                             <>
                                 <div className="flex flex-col items-center">
-                                    <img src="avatar.jpg" alt="Avatar" className="w-16 h-16 rounded-full mb-2" />
-                                    {/* <span>{userRole}</span> */}
+                                    <img src={userAvatar} alt="Avatar" className="w-16 h-16 rounded-full mb-2" />
+                                    <div className='flex-grow text-xl text-bold mb-2'> {userName}</div>
+                                    <div className='text-xl text-[#12B7BD] text-bold'>Student</div>
                                 </div>
                             </>
                         )}
 
                         {/* Navigation Links */}
-                        <div className="flex flex-col items-center flex-grow space-y-4">
+                        <div className="flex flex-col items-center flex-grow mt-16 space-y-2">
                             <NavItem link="/courses" text="Courses" />
                             <NavItem link="/about" text="About" />
                             <NavItem link="/contact" text="Contact" />
@@ -164,7 +171,7 @@ const NavBar = () => {
                             {!isLoggedIn && <NavItem link="/register" text="Register" asButton={true} />}
                             {isLoggedIn && (
                                 <button onClick={handleLogout} className='bg-[#12B7BD] text-white px-4 py-2 rounded hover:bg-[#0f9aa4] w-24' asButton={true}>
-                                    Logout
+                                    Log out
                                 </button>
                             )}
                         </div>

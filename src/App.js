@@ -12,6 +12,7 @@ import About from './components/About';
 import CoursesPage from './components/CoursePage';
 import CourseDetail from './components/CourseDetail';
 import Home from './components/Home';
+import CourseVideo from './components/CourseVideo';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
                 <Route path="/contact" element={ <ContactPage />}/>
                 <Route path="/courses/:id" element={<CourseDetail/>} />
                 <Route path="/courses" element={<CoursesPage/>} />
+                <Route path="/courses/video/:id" element={<CourseVideo/>} />
                 {/* <Route path="*" component={NotFound} /> */}
               </Routes>
               <Footer />

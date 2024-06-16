@@ -26,6 +26,9 @@ const Login = () => {
                 if (data.userInfo && data.userInfo.avatar_url) {
                     localStorage.setItem('userAvatar', data.userInfo.avatar_url);
                 }
+                if (data.userInfo && data.userInfo.username) {
+                    localStorage.setItem('userName', data.userInfo.username);
+                }
 
                 login();
                 if (data.userInfo.role === 'admin') {
