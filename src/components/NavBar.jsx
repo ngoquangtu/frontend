@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import AdPopup from './AdPopUp';
-import MostRatingCoursePage from './MostRatingCourses';
-import MostEnrollmentCoursePage from './MostEnrollmentCourses';
-import MostCommentCoursesPage from './MostCommentCourses';
+import SearchCourses from './SearchCourses';
 
 const NavBar = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -10,6 +8,7 @@ const NavBar = () => {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [loading,setLoading] = useState(false);
     const [keyword, setKeyword] = useState('');
+    const [courses, setCourses] = useState([]);
 
     useEffect(() => {
         const checkLoginStatus = () => {
@@ -61,13 +60,14 @@ const NavBar = () => {
                         <img src={"../assets/logo.svg"} alt="Logo" className="w-36 mr-8" />
                     </a>
                     <div className="hidden lg:block w-full lg:w-auto">
-                        <SearchBar />
+                        <SearchBar keyword={keyword} setKeyword={setKeyword} handleSearch={handleSearch} />
+                        {isSearchOpen && <SearchCourses keyword={keyword} courses={courses} loading={loading} />}
                     </div>
                 </div>
                 <div className="flex items-center space-x-4">
                     <NavItem link="/courses" text="Courses" className="hidden md:block" />
                     <NavItem link="/about" text="About" className="hidden md:block" />
-                    <NavItem link="/contact" text="Contact us" className="hidden md:block" />
+                    <NavItem link="/contact" text="Contact" className="hidden md:block mr-8" />
                     <button className="lg:hidden text-gray-700 mr-16" onClick={() => setIsSearchOpen(!isSearchOpen)}>
                         <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -102,7 +102,8 @@ const NavBar = () => {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
                             </svg>
                         </button>
-                        <SearchBar />
+                        <SearchBar keyword={keyword} setKeyword={setKeyword} handleSearch={handleSearch} />
+                        {isSearchOpen && <SearchCourses keyword={keyword} courses={courses} loading={loading} />}
                     </div>
                 </div>
             )}
@@ -131,7 +132,7 @@ const NavBar = () => {
                         <div className="flex flex-col items-center flex-grow space-y-4">
                             <NavItem link="/courses" text="Courses" />
                             <NavItem link="/about" text="About" />
-                            <NavItem link="/contact" text="Contact us" />
+                            <NavItem link="/contact" text="Contact" />
                         </div>
 
                         {/* Authentication Links */}
@@ -147,9 +148,6 @@ const NavBar = () => {
                     </div>
                 </div>
             )}
-             <MostRatingCoursePage />
-             <MostEnrollmentCoursePage/>
-             <MostCommentCoursesPage/>
              <AdPopup />
         </nav>
     );
@@ -179,23 +177,24 @@ const NavItem = ({ link, text, asButton, className }) => {
     );
 };
 
-const SearchBar = () => {
+const SearchBar = ({ keyword, setKeyword, handleSearch }) => {
     return (
-        <div className="relative w-full md:w-auto">
-            <input
-                type="text"
-                className="border border-gray-400 rounded-full py-2 px-4 w-full"
-                placeholder="Search anything..."
-            />
-            <button className="absolute right-2 top-1/2 transform -translate-y-1/2">
-                <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                </svg>
-            </button>
-
-
-        </div>
+      <div className="relative w-full md:w-auto">
+        <input
+          type="text"
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
+          className="border border-gray-400 rounded-full py-2 px-4 w-full"
+          placeholder="Search course..."
+        />
+        <button onClick={handleSearch} className="absolute right-2 top-1/2 transform -translate-y-1/2">
+          <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </button>
+      </div>
     );
-};
+  };
+  
 
 export default NavBar;

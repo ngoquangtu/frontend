@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const MostRatingCoursePage = () => {
   const [courses, setCourses] = useState([]);
@@ -12,7 +13,6 @@ const MostRatingCoursePage = () => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            
           },
         });
         if (!response.ok) {
@@ -44,11 +44,15 @@ const MostRatingCoursePage = () => {
       <h1 className="text-3xl font-bold mb-6">Most Rated Courses</h1>
       <div className="grid gap-8 lg:grid-cols-3">
         {courses.map(course => (
+          <Link to={`/courses/${course.id}`}>
           <div key={course.id} className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold mb-2">{course.title}</h2>
+            <h2 className="text-2xl font-bold mb-2">
+              {course.title}
+            </h2>
             <p className="text-gray-700 mb-4">{course.description}</p>
             <p className="text-yellow-500 font-bold">Rating: {course.rating}</p>
           </div>
+          </Link>
         ))}
       </div>
     </div>

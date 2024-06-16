@@ -1,50 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react'
+import NavBar from './NavBar';
+import MostRatingCoursePage from './MostRatingCourses';
+import MostEnrollmentCoursePage from './MostEnrollmentCourses';
+import MostCommentCoursesPage from './MostCommentCourses';
 
-const CoursesPage = () => {
-  const [courses, setCourses] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-
-  useEffect(() => {
-    fetch('http://localhost:8000/api/courses/:id')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Failed to fetch courses');
-        }
-        return response.json();
-      })
-      .then(data => {
-        setCourses(data);
-        setLoading(false);
-      })
-      .catch(error => {
-        console.error('Error fetching courses:', error);
-        setError('Error fetching courses. Please try again later.');
-        setLoading(false);
-      });
-  }, []);
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    return <p>{error}</p>;
-  }
-
+const Home = () => {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h1 className="text-3xl font-bold mb-6">All Courses</h1>
-      <div className="grid gap-8 lg:grid-cols-3">
-        {courses.map(course => (
-          <div key={course.id} className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold mb-2">{course.title}</h2>
-            <p className="text-gray-700 mb-4">{course.description}</p>
-          </div>
-        ))}
+    <div className="relative mb-16">
+      <div className="fixed top-0 left-0 w-full bg-white z-50">
+        <NavBar />
       </div>
-    </div>
-  );
-};
+      <div className="pt-16 relative">
+      <div className="relative w-full ">
+        <img src="assets/all1.jpg" alt="Pro-Skills" className="w-full h-64 object-cover" />
+        <div className="absolute inset-0 bg-black opacity-30"></div>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <h2 className="text-white text-5xl font-bold">Our Course</h2>
+        </div>
+      </div>
+      </div>
 
-export default CoursesPage;
+      <MostRatingCoursePage />
+      <MostEnrollmentCoursePage />
+      <MostCommentCoursesPage />
+    </div>
+  )
+}
+
+export default Home

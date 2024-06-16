@@ -1,31 +1,33 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Feedback from '../admin/Feedback'
-import UserList from '../admin/UserList'
-import CourseList from '../admin/CourseList'
-
+import Feedback from '../admin/Feedback';
+import UserList from '../admin/UserList';
+import CourseList from '../admin/CourseList';
+import ViewCounter from '../admin/ViewCounter';
+import CreateCourse from './CreateCourse';
 const AdminPage = () => {
   const [tabnum, setTabnum] = useState(0);
 
   return (
-    <div>
-      <div className='day la header chua 3 nut, css cai nay thanh tab bar'>
-        {/* Them logo proskill vao */}
-        <p>Admin page</p>
-        <button onClick={() => {setTabnum(0)}}>Course List</button>
-        <button onClick={() => {setTabnum(1)}}>User List</button>
-        <button onClick={() => {setTabnum(2)}}>User feedback</button>
+    <div className="max-w-3xl mx-auto px-4 py-8">
+      <div className="flex items-center justify-between bg-gray-100 py-4 px-8">
+        <h1 className="text-xl font-bold">Admin Page</h1>
+        <div className="flex space-x-4">
+          <button className={`tab-btn ${tabnum === 0 && 'active'}`} onClick={() => setTabnum(0)}>Course List</button>
+          <button className={`tab-btn ${tabnum === 1 && 'active'}`} onClick={() => setTabnum(1)}>User List</button>
+          <button className={`tab-btn ${tabnum === 2 && 'active'}`} onClick={() => setTabnum(2)}>User Feedback</button>
+          <button className={`tab-btn ${tabnum === 2 && 'active'}`} onClick={() => setTabnum(3)}>Create Courses</button>
+        </div>
       </div>
-      {tabnum === 0?
-        <CourseList></CourseList>
-        :
-      tabnum === 1?
-        <UserList></UserList>
-        :
-        <Feedback></Feedback>
-      }
+      <div className="mt-8">
+        {tabnum === 0 && <CourseList />}
+        {tabnum === 1 && <UserList />}
+        {tabnum === 2 && <Feedback />}
+        {tabnum === 3 && <CreateCourse />}
+        <ViewCounter />
+      </div>
+
     </div>
   );
 };
 
-export default AdminPage
+export default AdminPage;

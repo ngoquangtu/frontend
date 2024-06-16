@@ -19,26 +19,46 @@ function ForgotPasswordPage() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold mb-8">Forgot Password</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Email address</label>
-          <input
-            type="email"
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
+    <div className="min-h-screen flex items-center justify-center bg-white">
+      <div className="flex w-full h-full flex-wrap">
+        <div className="flex-1 hidden md:flex items-center justify-center bg-white">
+          <img
+            src="/assets/img-authpage.png" // Ensure the path is correct based on your project structure
+            alt="Authentication Illustration"
+            className="mx-auto mb-6"
+            style={{ width: '1200px', transform: 'scale(1.2)' }}
           />
         </div>
-        <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
-          Send Reset Link
-        </button>
-      </form>
-      {responseMessage && <p className="mt-4 text-green-600">{responseMessage}</p>}
-      <div className="mt-8">
-        <Link to="/" className="text-blue-600 hover:underline">Back to Home</Link>
+        <div className="flex-1 flex items-center justify-center">
+          <div className="flex flex-col items-center px-4 w-full max-w-md">
+            <Link to="/" className="mb-16">
+              <img src="/assets/logo.svg" alt="Logo" className="mx-auto" style={{ width: '180px' }} />
+            </Link>
+            <div className="bg-white shadow-lg rounded px-8 mb-4 w-full max-w-md">
+              <h2 className="text-2xl text-center font-bold mt-8 mb-2">Reset Password</h2>
+              <p className="text-lg text-gray-600 text-center mb-8">Enter the email associated with your account</p>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Email address</label>
+                  <input
+                    type="email"
+                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
+                <button type="submit"
+                        className="bg-[#12B7BD] hover:bg-[#0d9ea6] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full">
+                  Send Reset Link
+                </button>
+              </form>
+              {responseMessage && <p className="mt-4 text-green-600">{responseMessage}</p>}
+              <div className="mt-8">
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

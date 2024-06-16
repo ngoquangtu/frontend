@@ -1,20 +1,15 @@
 import React, { useState, useEffect } from 'react';
- 
+
 const Feedback = () => {
-  const data = [
-    { username: 'user1', content: 'This is content from user1' },
-    { username: 'user2', content: 'This is content from user2' },
-    { username: 'user3', content: 'This is content from user3' },
-  ];
- 
   const [feedbackList, setFeedbackList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const token=localStorage.getItem('token');
-        const response = await fetch('http://localhost:8000/api/admin/allusers', {
+        const token = localStorage.getItem('token');
+        const response = await fetch('http://localhost:8000/api/admin/feedback', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -22,49 +17,49 @@ const Feedback = () => {
           },
         });
 
- 
-        console.log(response.status);
-        if (response.status === 200) {
-          console.log( "xin chao " ,await response.json());
+        if (response.ok) {
+          const data = await response.json();
+          setFeedbackList(data);
         } else {
-          throw new Error('Failed to send message');
+          throw new Error('Failed to fetch feedback');
         }
       } catch (error) {
-        console.error('There was an error sending the message!', error);
-       
+        console.error('Error fetching feedback:', error);
+        setError('Error fetching feedback. Please try again later.');
       }
       setLoading(false);
     };
-    console.log(feedbackList);
- 
+
     fetchData();
   }, []);
- 
+
   if (loading) {
     return <p>Loading...</p>;
   }
- 
+
   if (error) {
     return <p>{error}</p>;
   }
- 
+
   return (
-    <div className="App">
-      <h1>User Content Table</h1>
-      <table>
+    <div className="max-w-3xl mx-auto px-4 py-8">
+      <h1 className="text-2xl font-bold mb-6">User Content Table</h1>
+      <table className="min-w-full border-collapse border border-gray-300">
         <thead>
           <tr>
-            <th>Username</th>
-            <th>Avatar</th>
-            <th>Content</th>
+            <th className="px-4 py-2 bg-gray-100 border border-gray-300">Username</th>
+            <th className="px-4 py-2 bg-gray-100 border border-gray-300">Avatar</th>
+            <th className="px-4 py-2 bg-gray-100 border border-gray-300">Content</th>
           </tr>
         </thead>
         <tbody>
-          {data.map((item, index) => (
+          {feedbackList.map((item, index) => (
             <tr key={index}>
-              <td>{item.username}</td>
-              <td><img src={item.avatar}></img></td>
-              <td>{item.content}</td>
+              <td className="px-4 py-2 border border-gray-300">{item.username}</td>
+              <td className="px-4 py-2 border border-gray-300">
+                <img src={item.avatar_url} alt="Avatar" className="w-10 h-10 rounded-full" />
+              </td>
+              <td className="px-4 py-2 border border-gray-300">{item.feedback}</td>
             </tr>
           ))}
         </tbody>
@@ -72,5 +67,5 @@ const Feedback = () => {
     </div>
   );
 }
- 
-export default Feedback
+
+export default Feedback;
