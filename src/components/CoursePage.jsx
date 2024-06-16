@@ -7,8 +7,6 @@ function CoursePage() {
   const [error, setError] = useState('');
   useEffect(() => {
     trackview();
-  },[]);
-  useEffect(() => {
     fetch('http://localhost:8000/api/courses/courseId')
       .then(response => {
         if (!response.ok) {

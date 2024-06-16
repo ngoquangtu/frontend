@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import AdPopup from './AdPopUp';
 
 const NavBar = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -117,7 +118,7 @@ const NavBar = () => {
                     </div>
                 </div>
             )}
-
+             <AdPopup />
         </nav>
     );
 };
