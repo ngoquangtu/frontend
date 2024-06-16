@@ -147,9 +147,9 @@ const NavBar = () => {
                     </div>
                 </div>
             )}
-             <MostRatingCoursePage />
+             {/* <MostRatingCoursePage />
              <MostEnrollmentCoursePage/>
-             <MostCommentCoursesPage/>
+             <MostCommentCoursesPage/> */}
              <AdPopup />
         </nav>
     );

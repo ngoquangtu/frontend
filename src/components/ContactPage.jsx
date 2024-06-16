@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import NavBar from './NavBar';
 
-function ContactPage() {
+function  ContactPage() {
   const [message, setMessage] = useState('');
   const [responseMessage, setResponseMessage] = useState('');
 
