@@ -42,7 +42,7 @@ const AdPopup = () => {
                         <p className="text-sm text-gray-600">Join ProSkills today and unlock your potential!</p>
                     </div>
                     <div className="w-1/2 p-4 flex items-center justify-center">
-                        <img src="/assets/ad-image.png" alt="ProSkills Ad" className="rounded-lg shadow-md" />
+                        <img src="/assets/popup.png" alt="ProSkills Ad" className="rounded-lg shadow-md" />
                     </div>
                 </div>
             </div>
