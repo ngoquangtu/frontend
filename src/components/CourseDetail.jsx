@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 const CourseDetails = () => {
-  const { courseId } = useParams();
+  const { id } = useParams();
   const [course, setCourse] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -10,11 +10,17 @@ const CourseDetails = () => {
   useEffect(() => {
     const fetchCourseDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/api/courses/${courseId}`);
+        const response = await fetch(`http://localhost:8000/api/courses/${id}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
         if (!response.ok) {
           throw new Error('Failed to fetch course details');
         }
         const data = await response.json();
+        console.log(data);
         setCourse(data);
         setLoading(false);
       } catch (error) {
@@ -25,7 +31,7 @@ const CourseDetails = () => {
     };
 
     fetchCourseDetails();
-  }, [courseId]);
+  }, [id]);
 
   if (loading) {
     return <p>Loading...</p>;
