@@ -12,6 +12,7 @@ const MostRatingCoursePage = () => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            
           },
         });
         if (!response.ok) {
