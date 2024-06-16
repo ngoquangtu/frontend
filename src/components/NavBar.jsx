@@ -10,11 +10,9 @@ const NavBar = () => {
     const [loading,setLoading] = useState(false);
     const [keyword, setKeyword] = useState('');
     const [courses, setCourses] = useState([]);
-<<<<<<< HEAD
     const [userAvatar, setUserAvatar] = useState('');
-=======
     const navigate = useNavigate();
->>>>>>> bbbfa1e8c46c3d2e67b08a859c2882c642899ab4
+
 
     useEffect(() => {
         const checkLoginStatus = () => {
@@ -101,14 +99,12 @@ const NavBar = () => {
                         {isLoggedIn && (
                             <>
                                 {/* <span>{userRole}</span> */}
-<<<<<<< HEAD
+
                                 <img src={userAvatar} alt="Avatar" className="w-8 h-8 rounded-full" />
                                 <button onClick={handleLogout} className="text-blue-500 hover:text-blue-700">Logout</button>
-=======
                                 <img src="avatar.jpg" alt="Avatar" className="w-8 h-8 rounded-full" />
                                 <button onClick={handleLogout} className="bg-[#12B7BD] text-white px-4 py-2 rounded hover:bg-[#0f9aa4] w-24">
                                     Logout</button>
->>>>>>> bbbfa1e8c46c3d2e67b08a859c2882c642899ab4
                             </>
                         )}
                     </div>
