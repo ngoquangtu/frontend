@@ -1,46 +1,31 @@
-import React, { createContext, useEffect, useState } from 'react';
-
-// AsyncStorage không sử dụng được trong React, thay vào đó sử dụng localStorage hoặc sessionStorage
-// import AsyncStorage from '@react-native-async-storage/async-storage';
+// AuthContext.js
+import React, { createContext, useState, useEffect } from 'react';
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-    const [loginInfo, setLoginInfo] = useState({});
-    const [isLogin, setLogin] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    const login = async (jwt, userInfo) => {
-        setLogin(prev => prev = true);
-        setLoginInfo(prev => prev = userInfo);
-        localStorage.setItem('JWT', jwt);
-        localStorage.setItem('userInfo', JSON.stringify(userInfo));
-    };
+    useEffect(() => {
+        const userLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        setIsLoggedIn(userLoggedIn);
+    }, []);
 
-    const checkLogin = () => {
-        // Lấy dữ liệu từ localStorage
-        const token = localStorage.getItem('JWT');
-        setLogin(token ? true : false);
-        if (token) setLoginInfo(JSON.parse(localStorage.getItem('userInfo')));
-        return token !== null;
+    const login = () => {
+        setIsLoggedIn(true);
+        localStorage.setItem('isLoggedIn', 'true');
     };
 
     const logout = () => {
-        setLogin(false);
-        // Xóa dữ liệu từ localStorage khi đăng xuất
-        localStorage.removeItem('JWT');
-        localStorage.removeItem('userInfo');
+        setIsLoggedIn(false);
+        localStorage.setItem('isLoggedIn', 'false');
     };
 
-    // Sử dụng useEffect để kiểm tra xem người dùng đã đăng nhập trước đó hay chưa khi component được tạo
-    useEffect(() => {
-        checkLogin();
-    }, []);
-
     return (
-        <AuthContext.Provider value={{ isLogin, loginInfo, login, checkLogin, logout }}>
+        <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
             {children}
         </AuthContext.Provider>
     );
 };
 
-export { AuthContext, AuthProvider };
+export { AuthProvider, AuthContext };

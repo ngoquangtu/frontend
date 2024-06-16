@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { trackview } from '../utils/trackview';
 
 function CoursePage() {
   const [course, setCourse] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-
+  useEffect(() => {
+    trackview();
+  },[]);
   useEffect(() => {
     fetch('http://localhost:8000/api/courses/courseId')
       .then(response => {

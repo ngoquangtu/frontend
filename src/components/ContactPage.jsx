@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-
+import React, { useState,useEffect } from 'react';
+import {trackview} from '../utils/trackview';
 function ContactPage() {
   const [message, setMessage] = useState('');
   const [responseMessage, setResponseMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
+    useEffect(() => {
+        trackview();
+    },[] );
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (message.trim() === "") {
@@ -19,10 +21,8 @@ function ContactPage() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}` 
+         'Authorization': `Bearer ${token}` 
         },
-        
-    
         body: JSON.stringify({ feedback: message }),
       });
       

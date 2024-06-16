@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState,useContext  } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import { AuthContext } from '../context/AuthContext';
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
     const navigate = useNavigate();
-
+    const { login } = useContext(AuthContext);
     const handleLogin = async () => {
         try {
             const response = await fetch('http://localhost:8000/api/auth/login', {
@@ -23,6 +23,7 @@ const Login = () => {
             } else if (data.type === 0) {
                 setMessage({ text: 'Login successful', color: 'green' });
                 localStorage.setItem('token', data.token);
+                login();
                 if (data.userInfo.role === 'admin') {
                     navigate('/admin');
                 } else {

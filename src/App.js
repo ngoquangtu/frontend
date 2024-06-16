@@ -9,11 +9,12 @@ import ForgotPasswordPage from './components/ForgotPasswordPage';
 import CoursePage from './components/CoursePage';
 import ProtectedRoute from './components/ProtectedRoutes';
 import AdminPage from './pages/admin/AdminPage';
-import AdminCourses from './pages/admin/CourseList';
+import { AuthProvider } from './context/AuthContext';
 
 
 function App() {
   return (
+    <AuthProvider>
         <Router>
               <Routes>
                 <Route exact path="/" element={<Home />} />
@@ -21,11 +22,12 @@ function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/resetpassword" element={<ForgotPasswordPage />} />
                 <Route path="/admin" element={ <ProtectedRoute role="admin"> <AdminPage /> </ProtectedRoute>}/>
-                <Route path="/contact" element={ <ProtectedRoute role="admin"> <ContactPage /> </ProtectedRoute>}/>
+                <Route path="/contact" element={ <ContactPage />}/>
                 <Route path="/courses " element= { <ProtectedRoute role="admin"> <CoursePage /> </ProtectedRoute>}/>
               </Routes>
               <Footer />
             </Router>
+    </AuthProvider>
   );
 }
 
