@@ -23,6 +23,10 @@ const Login = () => {
             } else if (data.type === 0) {
                 setMessage({ text: 'Login successful', color: 'green' });
                 localStorage.setItem('token', data.token);
+                if (data.userInfo && data.userInfo.avatar_url) {
+                    localStorage.setItem('userAvatar', data.userInfo.avatar_url);
+                }
+
                 login();
                 if (data.userInfo.role === 'admin') {
                     navigate('/admin');

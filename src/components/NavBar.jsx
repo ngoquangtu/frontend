@@ -9,13 +9,29 @@ const NavBar = () => {
     const [loading,setLoading] = useState(false);
     const [keyword, setKeyword] = useState('');
     const [courses, setCourses] = useState([]);
+    const [userAvatar, setUserAvatar] = useState('');
 
     useEffect(() => {
         const checkLoginStatus = () => {
             const userLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
             setIsLoggedIn(userLoggedIn);
         };
+        const getUserAvatar = () => {
+            const userInfo = localStorage.getItem('userAvatar');
+            console.log(userInfo);
+            if (userInfo) {
+                try {
+
+                    
+                    setUserAvatar(userInfo || ''); 
+                } catch (error) {
+                    console.error('Error parsing user info:', error);
+                }
+            }          
+
+        };
         checkLoginStatus();
+        getUserAvatar();
     }, []);
 
     const handleLoginSuccess = () => {
@@ -80,7 +96,7 @@ const NavBar = () => {
                         {isLoggedIn && (
                             <>
                                 {/* <span>{userRole}</span> */}
-                                <img src="avatar.jpg" alt="Avatar" className="w-8 h-8 rounded-full" />
+                                <img src={userAvatar} alt="Avatar" className="w-8 h-8 rounded-full" />
                                 <button onClick={handleLogout} className="text-blue-500 hover:text-blue-700">Logout</button>
                             </>
                         )}

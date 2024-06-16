@@ -10,7 +10,15 @@ const CourseDetails = () => {
   useEffect(() => {
     const fetchCourseDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/api/courses/${courseId}`);
+        const token = localStorage.getItem('token');
+        const response = await fetch(`http://localhost:8000/api/courses/${courseId}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}` 
+          }
+        });
+        
         if (!response.ok) {
           throw new Error('Failed to fetch course details');
         }
@@ -27,6 +35,7 @@ const CourseDetails = () => {
     fetchCourseDetails();
   }, [courseId]);
 
+
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -39,6 +48,7 @@ const CourseDetails = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <h1 className="text-3xl font-bold mb-6">{course.title}</h1>
       <p className="text-gray-700 mb-4">{course.description}</p>
+
       <p className="text-yellow-500 font-bold">Rating: {course.rating}</p>
       {/* Add more course details as needed */}
     </div>

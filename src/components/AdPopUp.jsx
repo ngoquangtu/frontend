@@ -4,21 +4,18 @@ const AdPopup = () => {
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
-        // Check if the advertisement has already been displayed
         if (!sessionStorage.getItem('adDisplayed')) {
-            // Set a timer to show the ad popup after 1 second
             const timer = setTimeout(() => {
                 setIsVisible(true);
-                // Mark the ad as displayed
                 sessionStorage.setItem('adDisplayed', 'true');
             }, 1000);
 
-            return () => clearTimeout(timer); // Clean up the timer if the component unmounts
+            return () => clearTimeout(timer);
         }
     }, []);
 
     const handleClose = () => {
-        setIsVisible(false); // Close the popup
+        setIsVisible(false);
     };
 
     return (
