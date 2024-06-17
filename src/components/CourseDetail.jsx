@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import NavBar from './NavBar';
 import { renderReviewRateIcon } from './ratingIcon';
-import { Rating } from '@material-ui/lab';
-import { Button } from 'react-bootstrap';
+import { Rating } from '@mui/material';
+import Button from '@mui/material/Button';
 
 const CourseDetails = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -62,6 +62,7 @@ const CourseDetails = () => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
         },
       });
       if (!response.ok) throw new Error('Failed to fetch course details');
@@ -130,7 +131,7 @@ const CourseDetails = () => {
       if (response.status === 200) {
         setUserComment("");
         setCommentMode(false);
-        fetchComments(); // Refresh comments
+        fetchComments(); 
       }
     } catch (error) {
       console.error('There was a problem with your fetch operation:', error);
@@ -171,7 +172,7 @@ const CourseDetails = () => {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="flex flex-col lg:flex-row space-y-8 lg:space-y-0 lg:space-x-8">
+          <div className="flex flex-col lg:flex-row space-y-8 lg:space-y-0 lg:space-x-8">
             {/* Thumbnail */}
             <div className="flex-1">
               <img src={course.thumbnail} alt="Course Thumbnail" className="w-full h-auto object-cover rounded-lg shadow-md" />
@@ -313,4 +314,3 @@ const CourseDetails = () => {
 };
 
 export default CourseDetails;
-

@@ -13,6 +13,7 @@ import CoursesPage from './components/CoursePage';
 import CourseDetail from './components/CourseDetail';
 import Home from './components/Home';
 import CourseVideo from './components/CourseVideo';
+import CourseComments from './pages/admin/CourseComments';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
                 <Route path="/courses/:id" element={<CourseDetail/>} />
                 <Route path="/courses" element={<CoursesPage/>} />
                 <Route path="/courses/video/:id" element={<CourseVideo/>} />
+                <Route path="/course-comments/:id" element={<CourseComments />} /> 
                 {/* <Route path="*" component={NotFound} /> */}
               </Routes>
               <Footer />

@@ -17,26 +17,33 @@ const AdminCourses = () => {
           },
         });
 
-        if (response.ok) {
-          const data = await response.json();
-          setCourses(data);
-        } else {
+        if (!response.ok) {
           throw new Error('Failed to fetch courses');
         }
+
+        const data = await response.json();
+        setCourses(data);
       } catch (error) {
         console.error('Error fetching courses:', error);
         setError('Error fetching courses. Please try again later.');
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
 
     fetchCourses();
   }, []);
 
   const handleDeleteCourse = async (id) => {
+    const confirmDelete = window.confirm('Are you sure you want to delete this course?');
+
+    if (!confirmDelete) {
+      return; // Cancel deletion
+    }
+
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:8000/api/admin/delete-course?${id}`, {
+      const response = await fetch(`http://localhost:8000/api/admin/delete-course/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -65,22 +72,24 @@ const AdminCourses = () => {
   }
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-8">
-      <h2 className="text-2xl font-bold mb-4">Admin Courses</h2>
-      <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="max-w-5xl mx-auto px-4 py-8">
+      <h2 className="text-3xl font-bold mb-4">Admin Courses</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {courses.map(course => (
-          <li key={course.id} className="bg-white shadow-md rounded-lg p-6">
-            <h3 className="text-lg font-semibold mb-2">{course.title}</h3>
-            <img src={course.thumbnail} alt={course.title} className="w-full h-40 object-cover mb-4" />
-            <button
-              onClick={() => handleDeleteCourse(course.id)}
-              className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-            >
-              Delete
-            </button>
-          </li>
+          <div key={course.id} className="bg-white shadow-md rounded-lg overflow-hidden">
+            <img src={course.thumbnail} alt={course.title} className="w-full h-40 object-cover" />
+            <div className="p-4">
+              <h3 className="text-xl font-semibold mb-2">{course.title}</h3>
+              <button
+                onClick={() => handleDeleteCourse(course.id)}
+                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
