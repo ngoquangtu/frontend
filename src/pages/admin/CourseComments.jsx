@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-
 const CourseComments = () => {
   const { courseId } = useParams();
   const [comments, setComments] = useState([]);
@@ -13,7 +12,7 @@ const CourseComments = () => {
     const fetchComments = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch(`http://localhost:8000/api/admin/comments/${courseId}`, {
+        const response = await fetch(`http://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/admin/comments/${courseId}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

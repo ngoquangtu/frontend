@@ -32,7 +32,7 @@ function App() {
                 <Route path="/courses" element={<CoursesPage/>} />
                 <Route path="/courses/video/:id" element={<CourseVideo/>} />
                 <Route path="/course-comments/:id" element={<CourseComments />} /> 
-                {/* <Route path="*" component={NotFound} /> */}
+                <Route path="*" element={<Home/>} />
               </Routes>
               <Footer />
             </Router>

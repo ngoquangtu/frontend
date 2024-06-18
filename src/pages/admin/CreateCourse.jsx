@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 const CreateCourse = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -29,7 +28,7 @@ const CreateCourse = () => {
         thumbnail,
       };
 
-      const response = await fetch('http://localhost:8000/api/admin/create-course', {
+      const response = await fetch(`http://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/admin/create-course`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

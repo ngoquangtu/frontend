@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
 const UserList = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -9,7 +8,7 @@ const UserList = () => {
     const fetchUsers = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:8000/api/admin/allusers', {
+        const response = await fetch(`http://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/admin/allusers`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

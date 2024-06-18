@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import NavBar from './NavBar';
 import YouTube from 'react-youtube';
-
 const CourseVideo = () => {
     const { id } = useParams();
     const [videos, setVideos] = useState([]);
@@ -14,7 +13,7 @@ const CourseVideo = () => {
     useEffect(() => {
         const fetchVideos = async () => {
             try {
-                const response = await fetch(`http://localhost:8000/api/courses/video/${id}`, {
+                const response = await fetch(`http://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/courses/video/${id}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',

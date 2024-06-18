@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
 const Feedback = () => {
   const [feedbackList, setFeedbackList] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -9,7 +8,7 @@ const Feedback = () => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:8000/api/admin/feedback', {
+        const response = await fetch(`http://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/admin/feedback`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

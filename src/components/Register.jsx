@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 const Register = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -10,7 +9,7 @@ const Register = () => {
     e.preventDefault();
     setMessage({ text: '', color: '' });
     try {
-      const response = await fetch('http://localhost:8000/api/auth/register', {
+      const response = await fetch(`http://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

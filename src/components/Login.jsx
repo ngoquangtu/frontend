@@ -1,3 +1,5 @@
+
+
 import React, { useState,useContext  } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
@@ -9,7 +11,8 @@ const Login = () => {
     const { login } = useContext(AuthContext);
     const handleLogin = async () => {
         try {
-            const response = await fetch('http://localhost:8000/api/auth/login', {
+            console.log(process.env.REACT_APP_LOCALHOST);
+            const response = await fetch(`http://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/auth/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

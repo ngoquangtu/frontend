@@ -1,7 +1,7 @@
-
+import {LOCALHOST, PORT} from '@env';
 export const trackview = async () => {
     try {
-        const response = await fetch('http://localhost:8000/api/users/views', {
+        const response = await fetch(`http://${LOCALHOST}:${PORT}/api/users/views`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

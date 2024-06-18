@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import NavBar from './NavBar';
-
 function  ContactPage() {
   const [message, setMessage] = useState('');
   const [responseMessage, setResponseMessage] = useState('');
@@ -12,7 +11,7 @@ function  ContactPage() {
         return;
       }
       const token=localStorage.getItem('token');
-      const response = await fetch('http://localhost:8000/api/users/feedback', {
+      const response = await fetch(`http://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/users/feedback`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

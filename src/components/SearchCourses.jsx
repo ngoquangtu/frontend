@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-
 const SearchCourses = () => {
   const [keyword, setKeyword] = useState('');
   const [courses, setCourses] = useState([]);
@@ -10,7 +9,7 @@ const SearchCourses = () => {
   const handleSearch = async () => {
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:8000/api/search-courses', { keyword });
+      const response = await axios.post(`http://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/search-courses`, { keyword });
       setCourses(response.data);
       setLoading(false);
     } catch (error) {

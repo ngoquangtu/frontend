@@ -4,7 +4,6 @@ import NavBar from './NavBar';
 import { renderReviewRateIcon } from './ratingIcon';
 import { Rating } from '@mui/material';
 import Button from '@mui/material/Button';
-
 const CourseDetails = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { id } = useParams();
@@ -33,7 +32,7 @@ const CourseDetails = () => {
     const fetchUserRating = async () => {
       if (isLoggedIn) {
         try {
-          const response = await fetch(`http://localhost:8000/api/courses/rating/${id}`, {
+          const response = await fetch(`http://${process.env.REACT_APP_LOCALHOST}:${process.env.PORT}/api/courses/rating/${id}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -58,7 +57,7 @@ const CourseDetails = () => {
 
   const fetchCourseDetails = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/api/courses/${id}`, {
+      const response = await fetch(`http://${process.env.REACT_APP_LOCALHOST}:${process.env.PORT}/api/courses/${id}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -78,7 +77,7 @@ const CourseDetails = () => {
 
   const fetchComments = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/api/courses/comment/${id}`, {
+      const response = await fetch(`http://${process.env.REACT_APP_LOCALHOST}:${process.env.PORT}/api/courses/comment/${id}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -100,7 +99,7 @@ const CourseDetails = () => {
 
   const addRating = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/api/courses/rating/${id}`, {
+      const response = await fetch(`http://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/courses/rating/${id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -120,7 +119,7 @@ const CourseDetails = () => {
 
   const addComment = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/api/comments/courses/${id}/comments`, {
+      const response = await fetch(`http://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/comments/courses/${id}/comments`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

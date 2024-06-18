@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import AdPopup from './AdPopUp';
 import { useNavigate } from 'react-router-dom';
 import SearchCourses from './SearchCourses';
-
 const NavBar = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,7 +20,6 @@ const NavBar = () => {
         };
         const getUserAvatar = () => {
             const userInfo = localStorage.getItem('userAvatar');
-            console.log(userInfo);
             if (userInfo) {
                 try {
                     setUserAvatar(userInfo || ''); 
@@ -32,7 +30,6 @@ const NavBar = () => {
         };
         const getUserName = () => {
             const userInfo = localStorage.getItem('userName');
-            console.log(userInfo);
             if (userInfo) {
                 try {
                     setUserName(userInfo || ''); 
@@ -60,7 +57,7 @@ const NavBar = () => {
     const handleSearch = () => {
         setLoading(true);
     
-        fetch('http://localhost:8000/api/search-courses', {
+        fetch(`http://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/search-courses`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

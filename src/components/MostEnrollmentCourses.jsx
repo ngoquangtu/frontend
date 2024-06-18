@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { renderReviewRateIcon } from './ratingIcon';
-
 const MostEnrollmentCoursePage = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -10,7 +9,7 @@ const MostEnrollmentCoursePage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/courses/mostenrollment', {
+        const response = await fetch(`http://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/courses/mostenrollment`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
