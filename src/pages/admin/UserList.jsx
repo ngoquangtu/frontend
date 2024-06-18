@@ -8,7 +8,7 @@ const UserList = () => {
     const fetchUsers = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch(`https://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/admin/allusers`, {
+        const response = await fetch(`https://${process.env.REACT_APP_WEBSITE}/api/admin/allusers`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

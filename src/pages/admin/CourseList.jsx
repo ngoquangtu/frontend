@@ -9,7 +9,7 @@ const AdminCourses = () => {
     const fetchCourses = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch(`http://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/admin/allcourses`, {
+        const response = await fetch(`http://${process.env.REACT_APP_WEBSITE}/api/admin/allcourses`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ const AdminCourses = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`https://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/admin/delete-course/${id}`, {
+      const response = await fetch(`https://${process.env.REACT_APP_WEBSITE}/admin/delete-course/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

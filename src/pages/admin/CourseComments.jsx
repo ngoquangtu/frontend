@@ -12,7 +12,7 @@ const CourseComments = () => {
     const fetchComments = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch(`http://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/admin/comments/${courseId}`, {
+        const response = await fetch(`http://${process.env.REACT_APP_WEBSITE}/api/admin/comments/${courseId}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

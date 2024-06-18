@@ -7,7 +7,7 @@ const ViewCounter = () => {
     const fetchViews = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch(`https://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/admin/stats`, {
+        const response = await fetch(`https://${process.env.REACT_APP_WEBSITE}/api/admin/stats`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

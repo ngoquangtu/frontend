@@ -119,7 +119,7 @@ const CourseDetails = () => {
 
   const addComment = async () => {
     try {
-      const response = await fetch(`https://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/comments/courses/${id}/comments`, {
+      const response = await fetch(`https://${process.env.REACT_APP_WEBSITE}/api/comments/courses/${id}/comments`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

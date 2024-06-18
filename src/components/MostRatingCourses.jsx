@@ -9,7 +9,7 @@ const MostRatingCoursePage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`https://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/courses/mostrating`, {
+        const response = await fetch(`https://${process.env.REACT_APP_WEBSITE}/api/courses/mostrating`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

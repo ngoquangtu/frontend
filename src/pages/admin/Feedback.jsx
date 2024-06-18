@@ -8,7 +8,7 @@ const Feedback = () => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch(`https://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/admin/feedback`, {
+        const response = await fetch(`https://${process.env.REACT_APP_WEBSITE}/api/admin/feedback`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

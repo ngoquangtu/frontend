@@ -28,7 +28,7 @@ const CreateCourse = () => {
         thumbnail,
       };
 
-      const response = await fetch(`https://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/admin/create-course`, {
+      const response = await fetch(`https://${process.env.REACT_APP_WEBSITE}/api/admin/create-course`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

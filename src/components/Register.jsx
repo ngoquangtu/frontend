@@ -9,7 +9,7 @@ const Register = () => {
     e.preventDefault();
     setMessage({ text: '', color: '' });
     try {
-      const response = await fetch(`https://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/auth/register`, {
+      const response = await fetch(`https://${process.env.REACT_APP_WEBSITE}/api/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

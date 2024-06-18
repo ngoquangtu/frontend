@@ -9,7 +9,7 @@ const SearchCourses = () => {
   const handleSearch = async () => {
     setLoading(true);
     try {
-      const response = await axios.post(`https://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/search-courses`, { keyword });
+      const response = await axios.post(`https://${process.env.REACT_APP_WEBSITE}/api/search-courses`, { keyword });
       setCourses(response.data);
       setLoading(false);
     } catch (error) {

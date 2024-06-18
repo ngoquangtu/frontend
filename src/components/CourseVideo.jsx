@@ -13,7 +13,7 @@ const CourseVideo = () => {
     useEffect(() => {
         const fetchVideos = async () => {
             try {
-                const response = await fetch(`https://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/courses/video/${id}`, {
+                const response = await fetch(`https://${process.env.REACT_APP_WEBSITE}/api/courses/video/${id}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
