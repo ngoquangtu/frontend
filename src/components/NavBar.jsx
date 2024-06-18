@@ -57,7 +57,7 @@ const NavBar = () => {
     const handleSearch = () => {
         setLoading(true);
     
-        fetch(`http://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/search-courses`, {
+        fetch(`https://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/search-courses`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

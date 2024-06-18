@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: `http://${process.env.LOCALHOST}:${process.env.PORT}/api`,
+  baseURL: `https://${process.env.LOCALHOST}:${process.env.PORT}/api`,
 });
 
 instance.interceptors.request.use(

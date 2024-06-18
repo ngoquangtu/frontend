@@ -9,7 +9,7 @@ const MostEnrollmentCoursePage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/courses/mostenrollment`, {
+        const response = await fetch(`https://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/courses/mostenrollment`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

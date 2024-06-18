@@ -12,7 +12,7 @@ const Login = () => {
     const handleLogin = async () => {
         try {
             console.log(process.env.REACT_APP_LOCALHOST);
-            const response = await fetch(`http://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/auth/login`, {
+            const response = await fetch(`https://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/auth/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

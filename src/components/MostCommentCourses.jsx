@@ -9,7 +9,7 @@ const MostCommentCoursesPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/courses/mostcomment`, {
+        const response = await fetch(`https://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/courses/mostcomment`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

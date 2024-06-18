@@ -8,7 +8,7 @@ function ForgotPasswordPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`http://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/auth/resetpassword`, { email });
+      await axios.post(`https://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/auth/resetpassword`, { email });
       setResponseMessage('If an account with that email exists, a password reset link has been sent.');
       setEmail('');
     } catch (error) {

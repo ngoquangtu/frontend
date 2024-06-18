@@ -43,7 +43,7 @@ const AdminCourses = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/admin/delete-course/${id}`, {
+      const response = await fetch(`https://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/admin/delete-course/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

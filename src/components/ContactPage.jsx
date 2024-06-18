@@ -11,7 +11,7 @@ function  ContactPage() {
         return;
       }
       const token=localStorage.getItem('token');
-      const response = await fetch(`http://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/users/feedback`, {
+      const response = await fetch(`https://${process.env.REACT_APP_LOCALHOST}:${process.env.REACT_APP_PORT}/api/users/feedback`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
